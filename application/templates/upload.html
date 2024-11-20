@@ -1,0 +1,83 @@
+<!-- templates/upload.html -->
+{% extends "layout.html" %}
+
+{% block title %}<title>Upload - YOLOv9 Shrimp Recognition</title>{% endblock %}
+
+{% block content %}
+<div class="card p-4 shadow-sm animate__animated animate__fadeIn">
+    <h2 class="mb-4">Upload Image(s) for Detection</h2>
+    {% if error %}
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+    {% endif %}
+    <form method="post" action="/" enctype="multipart/form-data" id="upload-form">
+        <div class="mb-3">
+            <label for="file_list" class="form-label">Choose Images</label>
+            <input class="form-control" type="file" name="file_list" id="file_list" multiple accept="image/*" required>
+            <div class="form-text">Supported formats: JPG, PNG, JPEG. You can upload multiple images.</div>
+        </div>
+        <div class="mb-3">
+            <label for="img_size_input" class="form-label">Model Inference Size</label>
+            <input type="number" class="form-control" id="img_size_input" name="img_size" value="640" min="320" step="32" required>
+            <div class="form-text">Image size for model inference. Must be a multiple of 32.</div>
+        </div>
+        <button type="submit" class="btn btn-primary">Run Detection</button>
+    </form>
+
+    <!-- Image Preview Section -->
+    <div class="mt-4" id="preview-section" style="display: none;">
+        <h5>Image Preview</h5>
+        <div class="row" id="image-preview"></div>
+    </div>
+</div>
+
+<!-- Processing Modal -->
+<div class="modal fade" id="processingModal" tabindex="-1" aria-labelledby="processingModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Processing...</span>
+        </div>
+        <p class="mt-3">Processing your images. Please wait...</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    const fileInput = document.getElementById('file_list');
+    const previewSection = document.getElementById('preview-section');
+    const imagePreview = document.getElementById('image-preview');
+    const uploadForm = document.getElementById('upload-form');
+    const processingModal = new bootstrap.Modal(document.getElementById('processingModal'), {
+        backdrop: 'static',
+        keyboard: false
+    });
+
+    fileInput.addEventListener('change', () => {
+        imagePreview.innerHTML = '';
+        const files = fileInput.files;
+        if (files.length > 0) {
+            previewSection.style.display = 'block';
+            Array.from(files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const col = document.createElement('div');
+                    col.className = 'col-md-3 mb-3';
+                    col.innerHTML = `<img src="${e.target.result}" class="img-thumbnail" alt="Image Preview">`;
+                    imagePreview.appendChild(col);
+                };
+                reader.readAsDataURL(file);
+            });
+        } else {
+            previewSection.style.display = 'none';
+        }
+    });
+
+    uploadForm.addEventListener('submit', () => {
+        processingModal.show();
+    });
+</script>
+{% endblock %}

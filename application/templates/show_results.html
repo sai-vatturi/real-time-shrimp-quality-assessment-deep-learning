@@ -1,0 +1,65 @@
+<!-- templates/show_results.html -->
+{% extends "layout.html" %}
+
+{% block title %}<title>Results - YOLOv9 Shrimp Recognition</title>{% endblock %}
+
+{% block content %}
+<div class="container my-4 animate__animated animate__fadeIn">
+    <h2 class="mb-4">Detection Results</h2>
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4>Overview</h4>
+        <form onsubmit="download('results.json', '{{ bbox_data_str | escape }}'); return false;">
+            <button type="submit" class="btn btn-success">Download Results</button>
+        </form>
+    </div>
+
+    {% for img_base64, bbox_list in bbox_image_data_zipped %}
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <img src="data:image/jpeg;base64,{{ img_base64 }}" class="img-fluid rounded" alt="Detected Image">
+                </div>
+                <div class="col-md-4">
+                    <h5>Detected Objects</h5>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>Bounding Box</th>
+                                <th>Confidence</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for bbox in bbox_list %}
+                            <tr>
+                                <td>{{ bbox['class_name'] }}</td>
+                                <td>{{ bbox['bbox'] }}</td>
+                                <td>{{ "%.2f"|format(bbox['confidence']) }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<script>
+    function download(filename, text) {
+        const element = document.createElement('a');
+        element.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(text));
+        element.setAttribute('download', filename);
+
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,68 @@
+/* static/styles.css */
+
+body {
+    background-color: #f4f6f9;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+    transition: color 0.3s;
+}
+
+.navbar-brand:hover {
+    color: #0d6efd;
+}
+
+.footer {
+    background-color: #343a40;
+    color: #ffffff;
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+    background-color: #ffffff;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.btn-primary {
+    background-color: #0d6efd;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+}
+
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+}
+
+.img-thumbnail {
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.img-thumbnail:hover {
+    transform: scale(1.05);
+}
+
+.navbar-nav .nav-link.active {
+    font-weight: bold;
+    color: #0d6efd !important;
+}
+
+.modal-backdrop {
+    display: none !important;
+}

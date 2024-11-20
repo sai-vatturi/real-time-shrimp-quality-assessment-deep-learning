@@ -1,0 +1,46 @@
+<!-- templates/home.html -->
+{% extends "layout.html" %}
+
+{% block title %}<title>Home - YOLOv9 Shrimp Recognition</title>{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center animate__animated animate__fadeIn">
+    <div class="col-lg-8 text-center">
+        <h1 class="mb-4">Welcome to YOLOv9 Shrimp Recognition</h1>
+        <p class="lead">Leverage our advanced detection model to identify and analyze shrimp in your images effortlessly.</p>
+        <a href="/upload" class="btn btn-primary btn-lg mt-3">Get Started</a>
+    </div>
+</div>
+
+<hr class="my-5">
+
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="bi bi-camera-video-fill display-4 text-primary mb-3"></i>
+                <h5 class="card-title">Easy Upload</h5>
+                <p class="card-text">Upload multiple images simultaneously with our user-friendly interface.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="bi bi-bar-chart-line-fill display-4 text-primary mb-3"></i>
+                <h5 class="card-title">Accurate Detection</h5>
+                <p class="card-text">Our model accurately identifies and highlights shrimp in your images.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="bi bi-download display-4 text-primary mb-3"></i>
+                <h5 class="card-title">Download Results</h5>
+                <p class="card-text">Easily download detection results in JSON format for further analysis.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -10,7 +10,7 @@ def send_request(file_list=['./image1.jpg'],
     '''
     Sends images to the server for detection and prints the JSON response
     '''
-    url = "http://localhost:8000/detect"
+    url = "http://34.234.97.27:8080/detect/"
 
     # Prepare files and data
     files = []

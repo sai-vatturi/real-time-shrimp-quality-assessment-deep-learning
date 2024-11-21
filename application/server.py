@@ -6,6 +6,8 @@ from fastapi.responses import JSONResponse, HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from typing import List, Optional
 from urllib.parse import urlencode
+from fastapi import FastAPI, Lifespan
+
 
 import cv2
 import numpy as np
